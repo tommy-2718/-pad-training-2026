@@ -1,0 +1,318 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Yu Gothic", "Meiryo", "MS Gothic", sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ==============================
+   ログイン画面
+   ============================== */
+
+.login-wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: #f0f2f5;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.login-subtitle {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #999;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 2px solid #c8ccd4;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.form-group input:focus {
+  border-color: #3b6fd4;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+.login-error {
+  display: none;
+  background: #fdecea;
+  color: #c62828;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.login-error.is-visible {
+  display: block;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 13px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #3b6fd4;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+
+.login-card button:hover {
+  background: #2a57b8;
+}
+
+.login-card button:active {
+  background: #1e419a;
+}
+
+/* ==============================
+   請求検索画面
+   ============================== */
+
+.container {
+  display: none;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: 0.04em;
+}
+
+header p {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.search-box input[type="text"] {
+  flex: 1;
+  min-width: 160px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid #c8ccd4;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.search-box input[type="text"]:focus {
+  border-color: #3b6fd4;
+}
+
+#statusFilter {
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 2px solid #c8ccd4;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  min-width: 170px;
+}
+
+#statusFilter:focus {
+  border-color: #3b6fd4;
+}
+
+.search-box button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #3b6fd4;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.search-box button:hover {
+  background: #2a57b8;
+}
+
+.search-box button:active {
+  background: #1e419a;
+}
+
+.result-count {
+  font-size: 0.88rem;
+  color: #555;
+  margin-bottom: 12px;
+  min-height: 1.2em;
+}
+
+/* ==============================
+   検索結果テーブル
+   ============================== */
+
+.table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+thead th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+tbody tr {
+  border-bottom: 1px solid #eef0f3;
+  transition: background 0.15s;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #f5f7fb;
+}
+
+tbody td {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+}
+
+.amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #1a1a2e;
+}
+
+/* ==============================
+   ステータスバッジ
+   ============================== */
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.status-paid {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+.status-unpaid {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.status-overdue {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* ==============================
+   0件メッセージ
+   ============================== */
+
+.no-result-message {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 48px 20px;
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>請求管理システム（演習用）</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ログイン画面 -->
+  <div id="loginArea" class="login-wrapper">
+    <div class="login-card">
+      <h1>請求管理システム</h1>
+      <p class="login-subtitle">Power Automate Desktop 演習用デモ</p>
+
+      <div class="form-group">
+        <label for="loginUser">ユーザーID</label>
+        <input type="text" id="loginUser" placeholder="ユーザーIDを入力" autocomplete="off">
+        <p class="hint">※正解のIDは admin です。</p>
+      </div>
+
+      <div class="form-group">
+        <label for="loginPassword">パスワード</label>
+        <input type="password" id="loginPassword" placeholder="パスワードを入力" autocomplete="off">
+        <p class="hint">※正解のパスワードは password です。</p>
+      </div>
+
+      <p id="loginError" class="login-error">ユーザーIDまたはパスワードが違います。</p>
+
+      <button id="loginButton" type="button" onclick="doLogin()">ログイン</button>
+    </div>
+  </div>
+
+  <!-- 請求検索画面 -->
+  <div id="mainArea" class="container">
+    <header>
+      <h1>請求検索</h1>
+      <p>顧客名・ステータスで絞り込めます。空欄のまま検索すると全件表示します。</p>
+    </header>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="顧客名を入力（例：山田、田中）"
+        autocomplete="off"
+      >
+      <select id="statusFilter">
+        <option value="">すべて</option>
+        <option value="支払済">支払済</option>
+        <option value="未払い">未払い</option>
+        <option value="支払い期限超過">支払い期限超過</option>
+      </select>
+      <button id="searchButton" type="button" onclick="search()">検索</button>
+    </div>
+
+    <div class="result-count" id="resultCount"></div>
+
+    <div class="table-wrapper">
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>顧客名</th>
+            <th>請求金額</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody id="results"></tbody>
+      </table>
+    </div>
+
+    <div id="noResultMessage" class="no-result-message">該当する請求情報はありません。</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
