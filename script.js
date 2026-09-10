@@ -1,15 +1,25 @@
-var invoiceData = [
-  { customer: "山田商事",   amount: 150000, status: "支払済" },
-  { customer: "田中工業",   amount: 320000, status: "未払い" },
-  { customer: "鈴木物産",   amount: 85000,  status: "支払済" },
-  { customer: "佐藤建設",   amount: 470000, status: "支払い期限超過" },
-  { customer: "高橋製作所", amount: 210000, status: "未払い" },
-  { customer: "佐々木商店", amount: 95000,  status: "支払済" },
-  { customer: "渡辺食品",   amount: 130000, status: "支払済" },
-  { customer: "中村電機",   amount: 560000, status: "未払い" },
-  { customer: "小林印刷",   amount: 42000,  status: "支払い期限超過" },
-  { customer: "加藤運送",   amount: 188000, status: "支払済" },
+var productData = [
+  { id: 1,  name: "鉛筆A",         price: 60,  stock: 30, threshold: 40 },
+  { id: 2,  name: "鉛筆B",         price: 70,  stock: 40, threshold: 40 },
+  { id: 3,  name: "消しゴムA",     price: 100, stock: 10, threshold: 50 },
+  { id: 4,  name: "消しゴムB",     price: 90,  stock: 40, threshold: 30 },
+  { id: 5,  name: "シャープペンA", price: 120, stock: 16, threshold: 40 },
+  { id: 6,  name: "シャープペンB", price: 300, stock: 13, threshold: 40 },
+  { id: 7,  name: "シャープペンC", price: 360, stock: 25, threshold: 40 },
+  { id: 8,  name: "シャープペンD", price: 700, stock: 25, threshold: 20 },
+  { id: 9,  name: "ボールペンA",   price: 100, stock: 10, threshold: 30 },
+  { id: 10, name: "ボールペンB",   price: 130, stock: 8,  threshold: 30 },
+  { id: 11, name: "ボールペンC",   price: 160, stock: 30, threshold: 30 },
+  { id: 12, name: "定規",          price: 100, stock: 40, threshold: 20 },
+  { id: 13, name: "カッター",      price: 140, stock: 15, threshold: 20 },
+  { id: 14, name: "ハサミ",        price: 130, stock: 25, threshold: 20 },
+  { id: 15, name: "のり",          price: 100, stock: 30, threshold: 20 },
 ];
+
+// 在庫数が発注基準以下なら「発注必要」、それ以外は「発注不要」
+function orderStatus(item) {
+  return item.stock <= item.threshold ? "発注必要" : "発注不要";
+}
 
 // -------- ログイン --------
 
@@ -22,8 +32,8 @@ function doLogin() {
     errorEl.classList.remove("is-visible");
     document.getElementById("loginArea").style.display = "none";
     document.getElementById("mainArea").style.display  = "block";
-    renderRows(invoiceData);
-    document.getElementById("resultCount").textContent = "全 " + invoiceData.length + " 件";
+    renderRows(productData);
+    document.getElementById("resultCount").textContent = "全 " + productData.length + " 件";
   } else {
     errorEl.classList.add("is-visible");
   }
@@ -39,9 +49,9 @@ function search() {
   countEl.textContent = "検索中...";
 
   setTimeout(function () {
-    var matched = invoiceData.filter(function (item) {
-      var nameOk   = query     === "" || item.customer.indexOf(query) !== -1;
-      var statusOk = statusVal === "" || item.status === statusVal;
+    var matched = productData.filter(function (item) {
+      var nameOk   = query     === "" || item.name.indexOf(query) !== -1;
+      var statusOk = statusVal === "" || orderStatus(item) === statusVal;
       return nameOk && statusOk;
     });
 
@@ -73,13 +83,14 @@ function renderRows(data) {
   tableWrapper.style.display = "block";
 
   tbody.innerHTML = data.map(function (item) {
-    var cls = item.status === "支払済"         ? "status-paid"
-            : item.status === "未払い"          ? "status-unpaid"
-            :                                     "status-overdue";
+    var status = orderStatus(item);
+    var cls = status === "発注必要" ? "status-reorder" : "status-ok";
     return "<tr>"
-      + "<td>" + item.customer + "</td>"
-      + "<td class=\"amount\">¥" + item.amount.toLocaleString() + "</td>"
-      + "<td><span class=\"status-badge " + cls + "\">" + item.status + "</span></td>"
+      + "<td>" + item.id + "</td>"
+      + "<td>" + item.name + "</td>"
+      + "<td class=\"price\">¥" + item.price.toLocaleString() + "</td>"
+      + "<td class=\"stock\">" + item.stock + "</td>"
+      + "<td><span class=\"status-badge " + cls + "\">" + status + "</span></td>"
       + "</tr>";
   }).join("");
 }

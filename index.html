@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>請求管理システム（演習用）</title>
+  <title>商品在庫管理システム（演習用）</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +12,7 @@
   <!-- ログイン画面 -->
   <div id="loginArea" class="login-wrapper">
     <div class="login-card">
-      <h1>請求管理システム</h1>
+      <h1>商品在庫管理システム</h1>
       <p class="login-subtitle">Power Automate Desktop 演習用デモ</p>
 
       <div class="form-group">
@@ -33,25 +33,24 @@
     </div>
   </div>
 
-  <!-- 請求検索画面 -->
+  <!-- 商品在庫検索画面 -->
   <div id="mainArea" class="container">
     <header>
-      <h1>請求検索</h1>
-      <p>顧客名・ステータスで絞り込めます。空欄のまま検索すると全件表示します。</p>
+      <h1>商品在庫検索</h1>
+      <p>商品名・発注要否で絞り込めます。空欄のまま検索すると全件表示します。</p>
     </header>
 
     <div class="search-box">
       <input
         type="text"
         id="searchInput"
-        placeholder="顧客名を入力（例：山田、田中）"
+        placeholder="商品名を入力（例：鉛筆、シャープペン）"
         autocomplete="off"
       >
       <select id="statusFilter">
         <option value="">すべて</option>
-        <option value="支払済">支払済</option>
-        <option value="未払い">未払い</option>
-        <option value="支払い期限超過">支払い期限超過</option>
+        <option value="発注必要">発注必要</option>
+        <option value="発注不要">発注不要</option>
       </select>
       <button id="searchButton" type="button" onclick="search()">検索</button>
     </div>
@@ -62,16 +61,18 @@
       <table id="resultTable">
         <thead>
           <tr>
-            <th>顧客名</th>
-            <th>請求金額</th>
-            <th>ステータス</th>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>金額</th>
+            <th>在庫数</th>
+            <th>発注要否</th>
           </tr>
         </thead>
         <tbody id="results"></tbody>
       </table>
     </div>
 
-    <div id="noResultMessage" class="no-result-message">該当する請求情報はありません。</div>
+    <div id="noResultMessage" class="no-result-message">該当する商品はありません。</div>
   </div>
 
   <script src="script.js"></script>
