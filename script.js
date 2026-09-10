@@ -88,7 +88,7 @@ function renderRows(data) {
     return "<tr>"
       + "<td>" + item.id + "</td>"
       + "<td>" + item.name + "</td>"
-      + "<td class=\"price\">¥" + item.price.toLocaleString() + "</td>"
+      + "<td class=\"price\">" + item.price + "</td>"
       + "<td class=\"stock\">" + item.stock + "</td>"
       + "<td><span class=\"status-badge " + cls + "\">" + status + "</span></td>"
       + "</tr>";
