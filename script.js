@@ -90,6 +90,7 @@ function renderRows(data) {
       + "<td>" + item.name + "</td>"
       + "<td class=\"price\">" + item.price + "</td>"
       + "<td class=\"stock\">" + item.stock + "</td>"
+      + "<td class=\"threshold\">" + item.threshold + "</td>"
       + "<td><span class=\"status-badge " + cls + "\">" + status + "</span></td>"
       + "</tr>";
   }).join("");

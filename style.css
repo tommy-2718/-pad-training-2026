@@ -274,7 +274,8 @@ tbody td {
   color: #1a1a2e;
 }
 
-.stock {
+.stock,
+.threshold {
   font-variant-numeric: tabular-nums;
 }
 
