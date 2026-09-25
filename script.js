@@ -48,7 +48,7 @@ function search() {
 }
 
 function searchWithLag() {
-  runSearch(3000, "検索中...（3秒お待ちください）");
+  runSearch(5000, "検索中...（5秒お待ちください）");
 }
 
 function runSearch(delayMs, loadingMessage) {

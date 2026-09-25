@@ -57,7 +57,7 @@ index.html を Microsoft Edge で直接開いてください。
 手順：
   1. 商品名入力欄（id: searchInput）に検索したい商品名を入力する
   2. 検索（ラグあり）ボタン（id: lagSearchButton）をクリックする
-  3. 「検索中...（3秒お待ちください）」が表示されたあと、3秒後に結果が表示される
+  3. 「検索中...（5秒お待ちください）」が表示されたあと、5秒後に結果が表示される
   4. 検索結果が表示されるまで待機してから、テーブルの情報を取得する
 
 確認ポイント：
@@ -124,7 +124,7 @@ index.html を Microsoft Edge で直接開いてください。
   searchInput      商品名入力欄
   statusFilter     発注要否の選択プルダウン
   searchButton     検索ボタン
-  lagSearchButton  検索（ラグあり）ボタン（3秒後に結果表示）
+  lagSearchButton  検索（ラグあり）ボタン（5秒後に結果表示）
   resultCount      件数表示エリア（「検索中...」も表示）
   resultTable      検索結果テーブル
   results          検索結果 tbody（各行を取得）
