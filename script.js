@@ -16,6 +16,8 @@ var productData = [
   { id: 15, name: "のり",          price: 100, stock: 30, threshold: 20 },
 ];
 
+var loginStateKey = "inventoryDemoLoggedIn";
+
 // 在庫数が発注基準以下なら「発注必要」、それ以外は「発注不要」
 function orderStatus(item) {
   return item.stock <= item.threshold ? "発注必要" : "発注不要";
@@ -30,13 +32,51 @@ function doLogin() {
 
   if (user === "admin" && pass === "password") {
     errorEl.classList.remove("is-visible");
-    document.getElementById("loginArea").style.display = "none";
-    document.getElementById("mainArea").style.display  = "block";
-    renderRows(productData);
-    document.getElementById("resultCount").textContent = "";
+    saveLoginState();
+    showSearchPage();
   } else {
     errorEl.classList.add("is-visible");
   }
+}
+
+function saveLoginState() {
+  try {
+    sessionStorage.setItem(loginStateKey, "true");
+  } catch (e) {
+    // 保存できない環境では、従来どおり更新時にログイン画面を表示する
+  }
+}
+
+function hasLoginState() {
+  try {
+    return sessionStorage.getItem(loginStateKey) === "true";
+  } catch (e) {
+    return false;
+  }
+}
+
+function clearLoginState() {
+  try {
+    sessionStorage.removeItem(loginStateKey);
+  } catch (e) {
+    // 保存領域が使えない場合は何もしない
+  }
+}
+
+function showSearchPage() {
+  document.getElementById("loginArea").style.display = "none";
+  document.getElementById("mainArea").style.display = "block";
+  resetSearchPage();
+}
+
+function goToLoginPage() {
+  clearLoginState();
+  resetSearchPage();
+  document.getElementById("mainArea").style.display = "none";
+  document.getElementById("loginArea").style.display = "flex";
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginPassword").value = "";
+  document.getElementById("loginError").classList.remove("is-visible");
 }
 
 // -------- 検索 --------
@@ -133,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("searchButton").addEventListener("click", search);
   document.getElementById("lagSearchButton").addEventListener("click", searchWithLag);
   document.getElementById("resetPageButton").addEventListener("click", resetSearchPage);
+  document.getElementById("goToLoginButton").addEventListener("click", goToLoginPage);
 
   // ログイン画面：Enter キー
   ["loginUser", "loginPassword"].forEach(function (id) {
@@ -145,4 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("searchInput").addEventListener("keydown", function (e) {
     if (e.key === "Enter") search();
   });
+
+  if (hasLoginState()) {
+    showSearchPage();
+  }
 });
