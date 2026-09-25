@@ -33,7 +33,7 @@ function doLogin() {
     document.getElementById("loginArea").style.display = "none";
     document.getElementById("mainArea").style.display  = "block";
     renderRows(productData);
-    document.getElementById("resultCount").textContent = "全 " + productData.length + " 件";
+    document.getElementById("resultCount").textContent = "";
   } else {
     errorEl.classList.add("is-visible");
   }
