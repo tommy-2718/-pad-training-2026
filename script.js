@@ -44,19 +44,23 @@ function doLogin() {
 var searchTimer = null;
 
 function search() {
-  runSearch(500);
+  runSearch(500, "検索中...");
 }
 
 function searchWithLag() {
-  runSearch(3000);
+  runSearch(3000, "検索中...（3秒お待ちください）");
 }
 
-function runSearch(delayMs) {
+function runSearch(delayMs, loadingMessage) {
   var query     = document.getElementById("searchInput").value.trim();
   var statusVal = document.getElementById("statusFilter").value;
   var countEl   = document.getElementById("resultCount");
+  var tableWrapper = document.querySelector(".table-wrapper");
+  var noResult = document.getElementById("noResultMessage");
 
-  countEl.textContent = "検索中...";
+  countEl.textContent = loadingMessage;
+  tableWrapper.style.display = "none";
+  noResult.style.display = "none";
 
   if (searchTimer !== null) {
     clearTimeout(searchTimer);
@@ -114,6 +118,9 @@ function renderRows(data) {
 // -------- イベント登録 --------
 
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("searchButton").addEventListener("click", search);
+  document.getElementById("lagSearchButton").addEventListener("click", searchWithLag);
+
   // ログイン画面：Enter キー
   ["loginUser", "loginPassword"].forEach(function (id) {
     document.getElementById(id).addEventListener("keydown", function (e) {
