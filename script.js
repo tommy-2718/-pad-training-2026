@@ -41,14 +41,28 @@ function doLogin() {
 
 // -------- 検索 --------
 
+var searchTimer = null;
+
 function search() {
+  runSearch(500);
+}
+
+function searchWithLag() {
+  runSearch(3000);
+}
+
+function runSearch(delayMs) {
   var query     = document.getElementById("searchInput").value.trim();
   var statusVal = document.getElementById("statusFilter").value;
   var countEl   = document.getElementById("resultCount");
 
   countEl.textContent = "検索中...";
 
-  setTimeout(function () {
+  if (searchTimer !== null) {
+    clearTimeout(searchTimer);
+  }
+
+  searchTimer = setTimeout(function () {
     var matched = productData.filter(function (item) {
       var nameOk   = query     === "" || item.name.indexOf(query) !== -1;
       var statusOk = statusVal === "" || orderStatus(item) === statusVal;
@@ -62,7 +76,8 @@ function search() {
     }
 
     renderRows(matched);
-  }, 500);
+    searchTimer = null;
+  }, delayMs);
 }
 
 // -------- 描画 --------
