@@ -51,6 +51,18 @@ function searchWithLag() {
   runSearch(5000, "検索中...（5秒お待ちください）");
 }
 
+function resetSearchPage() {
+  if (searchTimer !== null) {
+    clearTimeout(searchTimer);
+    searchTimer = null;
+  }
+
+  document.getElementById("searchInput").value = "";
+  document.getElementById("statusFilter").value = "";
+  document.getElementById("resultCount").textContent = "";
+  renderRows(productData);
+}
+
 function runSearch(delayMs, loadingMessage) {
   var query     = document.getElementById("searchInput").value.trim();
   var statusVal = document.getElementById("statusFilter").value;
@@ -120,6 +132,7 @@ function renderRows(data) {
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("searchButton").addEventListener("click", search);
   document.getElementById("lagSearchButton").addEventListener("click", searchWithLag);
+  document.getElementById("resetPageButton").addEventListener("click", resetSearchPage);
 
   // ログイン画面：Enter キー
   ["loginUser", "loginPassword"].forEach(function (id) {
